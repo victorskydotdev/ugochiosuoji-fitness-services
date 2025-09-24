@@ -1,0 +1,151 @@
+@use '../global/resets';
+
+.numbers-section {
+	margin-bottom: 10em;
+
+	.container {
+		width: 90%;
+		margin: 0 auto;
+
+		.wrap {
+			display: grid;
+			gap: 1em;
+			margin-bottom: 5em;
+
+			.card {
+				// background: resets.$gradient;
+				height: 350px;
+				width: 100%;
+				border-radius: 15px;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					border-radius: 15px;
+				}
+			}
+
+			.card1 {
+				background: resets.$dark-green;
+				padding-top: 3em;
+				min-height: 500px;
+
+				.text-wrap {
+					width: 80%;
+					margin: 0 auto;
+					margin-bottom: 2em;
+
+					.heading {
+						@include resets.heading();
+					}
+
+					.text {
+						color: #fff;
+						font-size: 2rem;
+						line-height: 40px;
+					}
+				}
+
+				.shape {
+					// background: teal;
+					width: fit-content;
+					margin-left: 2.5em;
+
+					img {
+						width: 150px;
+					}
+				}
+			}
+		}
+
+		.numbers {
+			// background: teal;
+			width: fit-content;
+			margin: 0 auto;
+			display: grid;
+			gap: 2em;
+			position: relative;
+
+			&::after {
+				content: '';
+				position: absolute;
+				top: 130%;
+				left: -10%;
+				background: resets.$gradient;
+				height: 2px;
+				width: 120%;
+			}
+
+			.number-wrap {
+				.heading {
+					font-size: 2rem;
+					color: resets.$light-green;
+					@include resets.sora-font();
+					margin-bottom: 0.3em;
+				}
+
+				.text {
+					max-width: 150px;
+					color: resets.$light-gray;
+					font-weight: 500;
+					line-height: 25px;
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: 43em) {
+	}
+
+	@media screen and (min-width: 62em) {
+		.container {
+			.wrap {
+				grid-template-columns: repeat(3, 1fr);
+				grid-template-areas:
+					'card1 card2 card3'
+					'card1 card4 card5';
+
+				.card {
+					height: 300px;
+				}
+
+				.card1 {
+					grid-area: card1;
+					height: 619px;
+
+					.shape {
+						img {
+							width: 80%;
+						}
+					}
+				}
+
+				.card2 {
+					grid-area: card2;
+				}
+
+				.card3 {
+					grid-area: card3;
+				}
+
+				.card4 {
+					grid-area: card4;
+				}
+
+				.card5 {
+					grid-area: card5;
+				}
+			}
+
+			.numbers {
+				display: flex;
+				gap: 4em;
+
+				.number-wrap {
+					text-align: center;
+				}
+			}
+		}
+	}
+}

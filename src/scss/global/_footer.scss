@@ -1,0 +1,116 @@
+@use '../global/resets';
+
+.footer {
+	width: 98%;
+	margin: 0 auto;
+	background: resets.$grey;
+	border-radius: 20px;
+	margin-bottom: 1em;
+	padding: 2em 0;
+
+	.container {
+		width: 90%;
+		margin: 0 auto;
+		position: relative;
+		margin-bottom: 2.5em;
+		display: grid;
+		gap: 2em;
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 105%;
+			background: resets.$gradient;
+			width: 100%;
+			height: 2px;
+			left: 0;
+		}
+
+		.nav-links {
+			display: grid;
+			gap: 1em;
+
+			.list {
+				.link {
+					@include resets.poppins-font();
+					font-size: 14px;
+					font-weight: 500;
+					color: #fff;
+				}
+			}
+		}
+
+		.comms-wrap {
+			display: grid;
+			gap: 1em;
+			height: fit-content;
+
+			p {
+				@include resets.poppins-font();
+				font-size: 14px;
+				font-weight: 500;
+				color: #fff;
+			}
+		}
+	}
+
+	.rights-section {
+		width: 90%;
+		margin: 0 auto;
+
+		.copyright {
+			@include resets.poppins-font();
+			font-size: 14px;
+			font-weight: 500;
+			color: #fff;
+		}
+	}
+
+	@media screen and (min-width: 43em) {
+		padding: 3em 0;
+		.container {
+			display: flex;
+
+			justify-content: space-around;
+			margin-bottom: 2em;
+
+			&::after {
+				content: '';
+				position: absolute;
+				top: 110%;
+				background: resets.$gradient;
+				width: 100%;
+				height: 2px;
+				left: 0;
+			}
+		}
+	}
+
+	@media screen and (min-width: 62em) {
+		padding: 4em 0;
+
+		.container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 2em;
+
+			.nav-links {
+				display: flex;
+				gap: 3em;
+			}
+
+			.comms-wrap {
+				display: flex;
+				gap: 1em;
+
+				p {
+					@include resets.poppins-font();
+					font-size: 14px;
+					font-weight: 500;
+					color: #fff;
+				}
+			}
+		}
+	}
+}

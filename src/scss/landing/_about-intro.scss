@@ -1,0 +1,84 @@
+@use '../global/resets';
+
+.about-intro {
+	// background: teal;
+	margin-bottom: 10em;
+
+	.container {
+		width: 90%;
+		margin: 0 auto;
+		display: grid;
+		gap: 1em;
+
+		.card {
+			background: resets.$dark-green;
+			height: 400px;
+			width: 100%;
+			border-radius: 20px;
+			color: #fff;
+		}
+
+		.card1 {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			.wrap {
+				width: 80%;
+
+				.heading {
+					font-size: 2.2rem;
+					max-width: 300px;
+					margin-bottom: 0.7em;
+					@include resets.sora-font();
+					position: relative;
+
+					&::after {
+						content: '';
+						position: absolute;
+						height: 2px;
+						width: 100%;
+						background: resets.$gradient;
+						top: 110%;
+						left: 0;
+					}
+				}
+
+				.text {
+					margin-bottom: 1em;
+					line-height: 30px;
+				}
+
+				.btn-wrap {
+					.btn {
+						@include resets.primary-btn();
+					}
+				}
+			}
+		}
+
+		.card2 {
+			.img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 20px;
+			}
+		}
+	}
+
+	@media screen and (min-width: 43em) {
+	}
+
+	@media screen and (min-width: 62em) {
+		.container {
+			display: flex;
+			justify-content: center;
+
+			.card {
+				height: 500px;
+				width: 400px;
+			}
+		}
+	}
+}

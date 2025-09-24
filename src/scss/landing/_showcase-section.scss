@@ -1,0 +1,32 @@
+@use '../global/resets';
+
+.showcase-section {
+	display: flex;
+	margin-bottom: 7em;
+	overflow: hidden;
+
+	.container {
+		.img-card {
+			display: flex;
+			gap: 1em;
+			animation: slide 10s infinite linear;
+
+			img {
+				width: 300px;
+				height: 350px;
+				object-fit: cover;
+				border-radius: 20px;
+			}
+		}
+	}
+}
+
+@keyframes slide {
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(-50%);
+	}
+}

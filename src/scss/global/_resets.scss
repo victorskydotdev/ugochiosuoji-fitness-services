@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap'); // sora
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'); // montserrat
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); // poppins
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+// color variables
+$gradient: linear-gradient(to right, #bbf816, #3a8449);
+$dark-green: #132b18;
+$accent-color: #bbf816;
+$light-green: #3a8449;
+$grey: #1e1e1e;
+$light-gray: rgba(30, 30, 30, 0.6);
+
+// font variables
+
+@mixin sora-font() {
+	font-family: 'Sora', sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
+}
+
+@mixin montserrat-font() {
+	font-family: 'Montserrat', sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
+}
+
+@mixin poppins-font() {
+	font-family: 'Poppins', sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
+}
+
+// primary button
+@mixin primary-btn() {
+	padding: 1em 1.3em;
+	background: $accent-color;
+	color: $dark-green;
+	border-radius: 8px;
+	text-transform: capitalize;
+	cursor: pointer;
+	border: none;
+	@include poppins-font();
+	font-weight: 500;
+	font-size: 0.9rem;
+}
+
+@mixin heading() {
+	color: $accent-color;
+	font-size: 3rem;
+	line-height: 50px;
+	margin-bottom: 0.3em;
+	text-transform: capitalize;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+p {
+	@include montserrat-font();
+	font-weight: 500;
+}
