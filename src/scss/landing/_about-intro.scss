@@ -2,7 +2,7 @@
 
 .about-intro {
 	// background: teal;
-	margin-bottom: 10em;
+	margin-bottom: 5em;
 
 	.container {
 		width: 90%;
@@ -16,6 +16,7 @@
 			width: 100%;
 			border-radius: 20px;
 			color: #fff;
+			@include resets.transBeforeElems();
 		}
 
 		.card1 {
@@ -27,11 +28,12 @@
 				width: 80%;
 
 				.heading {
-					font-size: 2.2rem;
+					font-size: 2.3rem;
 					max-width: 300px;
-					margin-bottom: 0.7em;
+					margin: 0 auto 0.7em;
 					@include resets.sora-font();
 					position: relative;
+					text-align: center;
 
 					&::after {
 						content: '';
@@ -47,37 +49,56 @@
 				.text {
 					margin-bottom: 1em;
 					line-height: 30px;
+					text-align: center;
 				}
 
 				.btn-wrap {
+					display: flex;
+					justify-content: center;
+
 					.btn {
 						@include resets.primary-btn();
+						width: 80%;
+						margin: 0 auto;
 					}
 				}
 			}
 		}
 
 		.card2 {
-			.img {
+			video {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
+				object-position: top;
 				border-radius: 20px;
 			}
 		}
 	}
 
 	@media screen and (min-width: 43em) {
+		.container {
+			width: 60%;
+
+			.card {
+			}
+		}
 	}
 
 	@media screen and (min-width: 62em) {
 		.container {
 			display: flex;
 			justify-content: center;
+			width: 80%;
 
 			.card {
 				height: 500px;
 				width: 400px;
+			}
+
+			.card1 {
+				.wrap {
+				}
 			}
 		}
 	}

@@ -14,22 +14,31 @@
 
 			.wrap {
 				max-width: 500px;
-				margin-bottom: 1.9em;
+				margin: 0 auto 1.9em;
+				text-align: center;
 
 				.heading {
-					font-size: 2rem;
+					font-size: 2.3rem;
+					line-height: 50px;
 					@include resets.heading();
 					color: #fff;
 				}
 
 				.subtext {
 					color: #fff;
+					width: 80%;
+					line-height: 30px;
+					margin: 0 auto;
 				}
 			}
 
 			.btn-wrap {
+				text-align: center;
+
 				.btn {
 					@include resets.primary-btn();
+					width: 80%;
+					margin: 0 auto;
 				}
 			}
 		}
@@ -41,16 +50,21 @@
 			.wrap {
 				background: resets.$dark-green;
 				border-radius: 20px;
-				padding-bottom: 1em;
+				padding: 2em 0;
+				min-height: 400px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				@include resets.transBeforeElems();
+				gap: 1em;
 
 				.text-content {
-					height: 200px;
 					display: flex;
 					align-items: center;
 					justify-content: center;
 
 					.text-wrapper {
-						width: 70%;
+						width: 80%;
 						text-align: center;
 						color: #fff;
 
@@ -75,7 +89,7 @@
 						.text {
 							line-height: 25px;
 							@include resets.montserrat-font();
-							font-size: 15px;
+							font-size: 14px;
 							font-weight: 500;
 						}
 					}
@@ -87,6 +101,13 @@
 					margin: 0 auto;
 					background: orange;
 					border-radius: 20px;
+
+					.img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						border-radius: 20px;
+					}
 				}
 			}
 		}
@@ -103,8 +124,26 @@
 				margin-bottom: 3em;
 
 				.wrap {
+					margin: unset;
+
 					.heading {
 						margin-bottom: 0.6em;
+						font-size: 2.5rem;
+						text-align: left;
+					}
+
+					.subtext {
+						margin: unset;
+						text-align: left;
+						width: unset;
+					}
+				}
+				.btn-wrap {
+					display: unset;
+
+					.btn {
+						width: unset !important;
+						// background: red !important;
 					}
 				}
 			}

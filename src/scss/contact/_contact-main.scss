@@ -1,0 +1,80 @@
+@use '../global/resets';
+
+.contact-main {
+	background: resets.$light;
+	// margin-bottom: 7em;
+	// padding-bottom: 6em;
+	height: 70vh;
+
+	.container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 90%;
+		margin: 0 auto;
+		position: relative;
+		height: 100%;
+
+		.heading-wrap {
+			padding: 5em 0;
+			z-index: 2;
+
+			.heading {
+				@include resets.sora-font();
+				margin-bottom: 0.5em;
+				color: resets.$light-green;
+			}
+
+			.subtext {
+				line-height: 30px;
+			}
+		}
+
+		.rotating-img {
+			position: absolute;
+			width: 120px;
+			top: 5%;
+			right: 10%;
+			animation: rotateElem 20s linear infinite;
+		}
+
+		@media screen and (min-width: 43em) {
+			width: 60%;
+		}
+
+		@media screen and (min-width: 43em) {
+			width: 60%;
+
+			.heading-wrap {
+				text-align: center;
+
+				.heading {
+					font-size: 3rem;
+					max-width: 600px;
+				}
+
+				.subtext {
+					max-width: 500px;
+					margin: 0 auto;
+				}
+			}
+
+			.rotating-img {
+				position: absolute;
+				width: 150px;
+				top: 60%;
+				left: -10% !important;
+				animation: rotateElem 20s linear infinite;
+			}
+		}
+	}
+}
+
+@keyframes rotateElem {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

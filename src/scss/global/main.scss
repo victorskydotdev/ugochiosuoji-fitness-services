@@ -2,9 +2,25 @@
 @use '../landing/hero-section';
 @use '../landing/numbers-section';
 @use '../landing/about-intro';
+@use '../landing/video-section';
 @use '../landing/approach-section';
 @use '../landing/showcase-section';
 @use '../landing/testimonial-section';
 @use '../landing/cta-section';
 
 @use '../global/footer';
+
+// about styles
+@use '../about/about-main';
+@use '../about/about-section';
+@use '../about/faq-section';
+
+// services styles
+@use '../services/services-main';
+
+// blog page styles
+@use '../blog/blog-main';
+
+// contact page styles
+@use '../contact/contact-main';
+@use '../contact/form-section';

@@ -1,0 +1,142 @@
+@use '../global/resets';
+
+.faq-section {
+	margin-bottom: 7em;
+
+	.container {
+		display: grid;
+		place-content: center;
+		width: 90%;
+		margin: 0 auto;
+
+		.faq-heading-section {
+			display: flex;
+			align-items: center;
+			margin-bottom: 2em;
+			@include resets.transBeforeElems();
+
+			.img-icon {
+				width: 80px;
+			}
+		}
+
+		.faq-content-wrap {
+			display: grid;
+			gap: 3em;
+
+			.content-wrap {
+				display: grid;
+				gap: 1em;
+				position: relative;
+
+				&::after {
+					content: '';
+					position: absolute;
+					height: 2px;
+					width: 100%;
+					background: resets.$gradient;
+					top: 105%;
+				}
+
+				&:last-child::after {
+					display: none;
+				}
+
+				.heading-wrap {
+					display: flex;
+					justify-content: space-between;
+					cursor: pointer;
+
+					.heading {
+						color: resets.$light-green;
+						max-width: 300px;
+					}
+
+					.angle-icon {
+						transition: all 500ms ease-in-out !important;
+
+						.fa-angle-down {
+							display: inline-block;
+							color: resets.$light-green;
+						}
+					}
+				}
+
+				.text-content {
+					// padding: 1.5em;
+					max-height: 0;
+					overflow: hidden;
+					transition: all 500ms ease-in-out;
+
+					.text {
+						font-size: 14px;
+						line-height: 30px;
+						color: resets.$dark-green;
+						opacity: 0;
+						// display: none;
+						transition: all 1500ms ease-in-out;
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: 43em) {
+		.container {
+			width: 70%;
+		}
+	}
+
+	@media screen and (min-width: 62em) {
+		.container {
+			width: 80%;
+
+			display: flex;
+			align-items: flex-start;
+			gap: 5em;
+
+			.faq-heading-section {
+				width: 50%;
+				gap: 0.5em;
+				align-items: center;
+				padding-top: 2em;
+				position: sticky;
+				top: 5%;
+
+				.img-icon {
+					width: 150px;
+				}
+
+				.heading {
+					font-size: 2.5rem;
+					max-width: 300px;
+					line-height: 40px;
+					text-transform: capitalize;
+				}
+			}
+
+			.faq-content-wrap {
+				width: 50%;
+			}
+		}
+	}
+}
+
+.expand-accordion {
+	max-height: 400px !important;
+	background: resets.$light-green;
+	transition: all 500ms ease-in-out;
+	padding: 1.5em 1.5em !important;
+
+	.text {
+		// display: block !important;
+		transition: all 2000ms ease;
+		opacity: 1 !important;
+		color: #fff !important;
+	}
+}
+
+.rotate-icon {
+	transform: rotate(180deg) !important;
+	transition: all 500ms ease-in-out;
+}

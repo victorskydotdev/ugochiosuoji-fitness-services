@@ -6,10 +6,13 @@
 	overflow: hidden;
 
 	.container {
+		display: flex;
+		gap: 1em;
+
 		.img-card {
 			display: flex;
 			gap: 1em;
-			animation: slide 10s infinite linear;
+			animation: slide 15s infinite linear;
 
 			img {
 				width: 300px;
@@ -27,6 +30,6 @@
 	}
 
 	to {
-		transform: translateX(-50%);
+		transform: translateX(-100%);
 	}
 }

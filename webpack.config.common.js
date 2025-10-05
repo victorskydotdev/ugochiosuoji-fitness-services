@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ImageMinimizerWebpackPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
 	mode: 'none',
@@ -29,6 +30,24 @@ module.exports = {
 			// favicon: "",
 		}),
 
+		// about page template
+		new HtmlWebpackPlugin({
+			template: './src/html/about.html',
+			filename: 'about/index.html',
+			// chunks: "",
+			inject: 'body',
+			// favicon: "",
+		}),
+
+		// services page template
+		new HtmlWebpackPlugin({
+			template: './src/html/services.html',
+			filename: 'services/index.html',
+			// chunks: "",
+			inject: 'body',
+			// favicon: "",
+		}),
+
 		// blog page template
 		new HtmlWebpackPlugin({
 			template: './src/content/blog-page.html',
@@ -46,6 +65,39 @@ module.exports = {
 			inject: 'body',
 			// favicon: "",
 		}),
+
+		// new ImageMinimizerWebpackPlugin({
+		// 	minimizer: {
+		// 		implementation: ImageMinimizerWebpackPlugin.imageminMinify,
+		// 		options: {
+		// 			plugins: [
+		// 				['gifsicle', { interlaced: true }],
+		// 				['jpegtran', { progressive: true }],
+		// 				['optipng', { optimizationLevel: 5 }],
+
+		// 				['svgo'],
+		// 			],
+		// 		},
+		// 	},
+
+		// 	generator: [
+		// 		{
+		// 			preset: 'jpg',
+		// 			implementation: ImageMinimizerWebpackPlugin.imageminGenerate,
+		// 			options: {
+		// 				plugins: [['mozjpeg', { quality: 70, progressive: true }]],
+		// 			},
+		// 		},
+		// 		{
+		// 			preset: 'webp',
+
+		// 			implementation: ImageMinimizerWebpackPlugin.imageminGenerate,
+		// 			options: {
+		// 				plugins: [['imagemin-webp', { quality: 70 }]],
+		// 			},
+		// 		},
+		// 	],
+		// }),
 	],
 
 	module: {
@@ -70,4 +122,6 @@ module.exports = {
 			},
 		],
 	},
+
+	// minimizing and optimizing images for fast site-load times
 };

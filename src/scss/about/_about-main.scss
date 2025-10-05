@@ -1,0 +1,109 @@
+@use '../global/resets';
+
+.about-main {
+	background: resets.$light;
+	margin-bottom: 7em;
+	padding-bottom: 6em;
+
+	.container {
+		width: 90%;
+		margin: 0 auto;
+		position: relative;
+
+		.heading-wrap {
+			padding: 5em 0;
+			position: relative;
+			z-index: 2;
+
+			.heading {
+				@include resets.sora-font();
+				margin-bottom: 0.5em;
+				color: resets.$light-green;
+				@include resets.transBeforeElems();
+			}
+
+			.subtext {
+				line-height: 30px;
+				@include resets.transBeforeElems();
+			}
+		}
+
+		.dotgrid {
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+
+		.about-img-wrap {
+			width: 100%;
+			height: 250px;
+
+			.img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 15px;
+				@include resets.transBeforeElems();
+			}
+		}
+	}
+
+	@media screen and (min-width: 43em) {
+		.container {
+			width: 85%;
+
+			.heading-wrap {
+				width: 70%;
+			}
+
+			.dotgrid {
+				position: absolute;
+				top: 10%;
+				right: 0;
+			}
+
+			.about-img-wrap {
+				height: 300px;
+			}
+		}
+	}
+
+	@media screen and (min-width: 62em) {
+		height: 80vh;
+		padding-bottom: 0;
+		margin-bottom: 10em;
+
+		.container {
+			width: 90%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			gap: 5em;
+
+			.heading-wrap {
+				width: 100%;
+
+				.heading {
+					font-size: 3rem;
+				}
+
+				.subtext {
+					max-width: 400px;
+				}
+			}
+
+			.dotgrid {
+				position: absolute;
+				top: 10%;
+				right: 38%;
+			}
+
+			.about-img-wrap {
+				height: 300px;
+				width: 100%;
+				position: relative;
+				z-index: 2;
+			}
+		}
+	}
+}

@@ -1,0 +1,163 @@
+@use '../global/resets';
+
+.form-section {
+	margin-top: -3em;
+	margin-bottom: 9em;
+
+	.container {
+		width: 90%;
+		margin: 0 auto;
+		display: grid;
+		gap: 3em;
+
+		.form-wrap {
+			background: #fff;
+			box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.185);
+			padding: 2em;
+			display: grid;
+			gap: 2em;
+			border-radius: 15px;
+
+			.form-heading {
+				.heading {
+					max-width: 250px;
+				}
+			}
+
+			.contact-form {
+				display: grid;
+				gap: 1.5em;
+
+				.input-group {
+					display: grid;
+					gap: 0.4em;
+				}
+
+				.btn-wrap {
+					.btn {
+						@include resets.primary-btn();
+						width: 100%;
+						background: resets.$dark-green;
+						color: resets.$accent-color;
+					}
+				}
+			}
+		}
+
+		.contact-info-wrap {
+			// display: grid;
+			// gap: 1em;
+
+			.contact {
+				display: grid;
+				// gap: 1em;
+				// place-content: center;
+
+				.wrapper {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					gap: 0.7em;
+					background: resets.$dark-green;
+					width: 100%;
+					padding: 1em;
+					border-radius: 10px;
+
+					color: resets.$accent-color;
+
+					i {
+						// color: resets.$grey;
+						color: resets.$accent-color;
+						// opacity: 0.6;
+					}
+
+					a {
+						color: resets.$accent-color;
+						font-weight: 500;
+					}
+				}
+			}
+
+			.social-media-wrap {
+				position: relative;
+				height: fit-content;
+
+				a {
+					img {
+						width: 100%;
+					}
+
+					.heading-text {
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+						color: resets.$light;
+						font-size: 1.2rem;
+						text-align: center;
+						width: 80%;
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: 43em) {
+	}
+
+	@media screen and (min-width: 62em) {
+		margin-top: 4em;
+		padding-left: 7em;
+
+		.container {
+			width: 70%;
+			grid-template-columns: repeat(2, 1fr);
+
+			.form-wrap {
+				margin-top: -7em;
+			}
+
+			.contact-info-wrap {
+				display: grid;
+				gap: 1.4em;
+				// background: orange;
+				height: fit-content;
+
+				.contact {
+					display: grid;
+					gap: 1em;
+					// background: red;
+					height: fit-content;
+
+					.wrapper {
+						justify-content: flex-start;
+						background: unset;
+						padding: unset !important;
+
+						color: resets.$grey;
+						opacity: 0.6;
+
+						.fa-solid {
+							color: resets.$grey;
+							opacity: 0.6;
+						}
+
+						a,
+						p {
+							color: resets.$grey;
+							opacity: 0.6;
+						}
+					}
+				}
+
+				.social-media-wrap {
+					width: 80%;
+					a {
+						img {
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,126 @@
+@use '../global/resets';
+
+.video-section {
+	background: resets.$light;
+	padding-bottom: 5em;
+
+	.container {
+		width: 90%;
+		margin: 0 auto;
+		display: grid;
+		// gap: 3em;
+
+		.section-1 {
+			display: grid;
+			justify-content: center;
+			padding: 5em 0;
+			gap: 3em;
+
+			.text-area {
+				width: 100%;
+				@include resets.transBeforeElems();
+
+				.heading {
+					font-size: 2.3rem;
+					margin-bottom: 0.7em;
+					color: resets.$grey();
+					text-align: center;
+				}
+
+				.subtext {
+					font-size: 15px;
+					line-height: 30px;
+					text-align: center;
+				}
+			}
+
+			.wrap {
+				width: 100%;
+				// border: solid 2px #132b18;
+				position: relative;
+				height: 80vh;
+				@include resets.transBeforeElems();
+
+				video {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					border-radius: 15px;
+					// object-position: top;
+					position: relative;
+					z-index: 1;
+				}
+
+				&::after {
+					content: '';
+					position: absolute;
+					background: resets.$gradient;
+					top: -1%;
+					left: -2%;
+					height: 102%;
+					width: 104%;
+					border-radius: 18px;
+				}
+			}
+		}
+
+		@media screen and (min-width: 43em) {
+			width: 60%; // container width
+
+			.text-area {
+				// background: teal;
+			}
+
+			.wrap {
+				width: 70% !important;
+
+				position: relative;
+
+				&::before {
+					content: '';
+					position: absolute;
+					height: 200px;
+					width: 200px;
+					border: solid 10px red;
+					right: -80%;
+					border-radius: 50%;
+				}
+			}
+		}
+
+		@media screen and (min-width: 62em) {
+			// display: flex;
+			width: 100%;
+
+			.section-1 {
+				width: 65%;
+				grid-template-columns: repeat(2, 1fr);
+				grid-template-areas: 'wrap text-area';
+				margin: 0 auto;
+				gap: 2.5em;
+
+				.text-area {
+					padding-top: 2em;
+
+					.heading {
+						font-size: 2.5rem;
+						text-align: left;
+					}
+
+					.subtext {
+						text-align: left;
+					}
+				}
+
+				.wrap {
+					grid-area: wrap;
+					width: 100% !important;
+
+					&::before {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
