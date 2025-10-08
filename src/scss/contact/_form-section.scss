@@ -45,12 +45,12 @@
 		}
 
 		.contact-info-wrap {
-			// display: grid;
-			// gap: 1em;
+			display: grid;
+			gap: 1em;
 
 			.contact {
 				display: grid;
-				// gap: 1em;
+				gap: 1em;
 				// place-content: center;
 
 				.wrapper {
@@ -120,13 +120,11 @@
 			.contact-info-wrap {
 				display: grid;
 				gap: 1.4em;
-				// background: orange;
 				height: fit-content;
 
 				.contact {
 					display: grid;
 					gap: 1em;
-					// background: red;
 					height: fit-content;
 
 					.wrapper {

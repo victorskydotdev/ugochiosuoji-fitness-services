@@ -13,7 +13,7 @@ export const pageTransition = () => {
 			if (entry.isIntersecting) {
 				setTimeout(() => {
 					entry.target.classList.add('in-view');
-				}, 800 * index);
+				}, 500 * index);
 			}
 		});
 	});
