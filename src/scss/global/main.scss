@@ -14,12 +14,15 @@
 @use '../about/about-main';
 @use '../about/about-section';
 @use '../about/faq-section';
+@use '../about/about-modal-box';
 
 // services styles
 @use '../services/services-main';
+@use '../services/our-programs-section';
 
 // blog page styles
 @use '../blog/blog-main';
+@use '../blog/articles-section';
 
 // contact page styles
 @use '../contact/contact-main';

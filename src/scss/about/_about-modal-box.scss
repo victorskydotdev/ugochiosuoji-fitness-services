@@ -1,0 +1,79 @@
+@use '../global/resets';
+
+.about-modal-box {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.555);
+	background: rgba(19, 43, 24, 0.795);
+	z-index: 3;
+	transition: transform 1500ms cubic-bezier(0.4, 0, 0.2, 1);
+	transform: translateY(-100%);
+	backdrop-filter: blur(15px);
+	padding: 5em 0;
+	overflow-y: auto;
+
+	.container {
+		width: 90%;
+		margin: 0 auto;
+		opacity: 0;
+		transition: all 1000ms ease-in !important;
+
+		display: grid;
+		gap: 1em;
+		margin-bottom: 2em;
+
+		.text {
+			color: #fff;
+			font-size: 15px;
+			line-height: 30px;
+		}
+	}
+
+	.btn-wrap {
+		width: 90%;
+		margin: 0 auto;
+
+		.about-modal-close-btn {
+			@include resets.primary-btn();
+			width: 100%;
+		}
+	}
+
+	@media screen and (min-width: 43em) {
+		.container {
+			width: 70%;
+		}
+
+		.btn-wrap {
+			width: 70%;
+			.about-modal-close-btn {
+				width: unset;
+			}
+		}
+	}
+
+	@media screen and (min-width: 62em) {
+		.container {
+			width: 50%;
+		}
+
+		.btn-wrap {
+			width: 50%;
+			.about-modal-close-btn {
+				width: unset;
+			}
+		}
+	}
+}
+
+.show-modal {
+	transform: translateY(0);
+
+	.container {
+		opacity: 1 !important;
+		transition: all 1000ms ease-in !important;
+	}
+}

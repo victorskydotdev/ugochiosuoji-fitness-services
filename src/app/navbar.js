@@ -52,7 +52,7 @@ export const renderNav = () => {
 							<a href="/about" class="link">About</a>
 						</li>
 						<li class="list">
-							<a href="/services" class="link">Services</a>
+							<a href="/programs" class="link">Programs</a>
 						</li>
 						<li class="list">
 							<a href="/blog" class="link">Blog & Articles</a>

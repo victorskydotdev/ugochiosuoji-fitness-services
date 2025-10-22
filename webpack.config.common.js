@@ -41,8 +41,8 @@ module.exports = {
 
 		// services page template
 		new HtmlWebpackPlugin({
-			template: './src/html/services.html',
-			filename: 'services/index.html',
+			template: './src/html/programs.html',
+			filename: 'programs/index.html',
 			// chunks: "",
 			inject: 'body',
 			// favicon: "",

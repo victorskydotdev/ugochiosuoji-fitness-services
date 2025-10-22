@@ -1,0 +1,163 @@
+@use '../global/resets';
+
+.our-programs-section {
+	margin-bottom: 7em;
+
+	.container {
+		width: 90%;
+		margin: 0 auto;
+
+		.heading-wrap {
+			text-align: center;
+			margin-bottom: 4em;
+
+			.heading {
+				font-size: 30px;
+				color: resets.$grey();
+				text-align: center;
+				margin-bottom: 0.4em;
+			}
+
+			.subtext {
+				line-height: 30px;
+				font-size: 15px;
+
+				@media screen and (min-width: 62em) {
+					width: 40%;
+					margin: 0 auto;
+				}
+			}
+		}
+
+		.programs-card {
+			display: grid;
+			gap: 5em;
+
+			.card {
+				width: 100%;
+				display: grid;
+				gap: 1.3em;
+
+				.container {
+					width: 100%;
+					display: grid;
+					gap: 1em;
+
+					.img-wrap {
+						width: 100%;
+						height: 250px;
+						border: 2px solid #bbb;
+						border-radius: 15px;
+
+						img {
+							width: 100%;
+							height: 100%;
+							object-fit: contain;
+							border-radius: 15px;
+						}
+					}
+
+					.text-wrap {
+						h1 {
+							font-size: 1.1rem;
+						}
+
+						.description {
+							margin-bottom: 0.5em;
+						}
+
+						.price {
+							margin-bottom: 0.5em;
+						}
+
+						.btn-wrap {
+							.program-select-btn {
+								@include resets.primary-btn();
+								padding: 0.9em 1em;
+								background: resets.$dark-green;
+								color: resets.$accent-color;
+							}
+
+							.learn-more-btn {
+								@include resets.primary-btn();
+								padding: 0.9em 1em;
+							}
+						}
+					}
+				}
+
+				&:last-child {
+					// background: teal;
+
+					.text-wrap {
+						margin-bottom: 1.5em;
+
+						.heading {
+							font-size: 30px;
+							color: resets.$grey();
+							margin-bottom: 0.3em;
+						}
+
+						.subtext {
+							line-height: 30px;
+							font-size: 15px;
+						}
+
+						@media screen and (min-width: 43em) {
+							.heading {
+								text-align: center;
+							}
+
+							.subtext {
+								text-align: center;
+							}
+						}
+					}
+
+					.product-card {
+						display: grid;
+					}
+				}
+			}
+
+			@media screen and (min-width: 43em) {
+			}
+
+			@media screen and (min-width: 62em) {
+				.card {
+					display: grid;
+					grid-template-columns: repeat(4, 1fr);
+
+					.container {
+						width: 300px;
+					}
+
+					.product-card {
+						display: grid;
+						grid-template-columns: repeat(4, 1fr);
+					}
+
+					&:last-child {
+						display: block;
+
+						.product-card {
+							display: grid;
+							grid-template-columns: repeat(4, 1fr);
+
+							.text-wrap {
+								margin-bottom: 2em;
+
+								.heading {
+									font-size: 30px;
+									color: resets.$grey();
+									text-align: center;
+									margin-bottom: 0.4em;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

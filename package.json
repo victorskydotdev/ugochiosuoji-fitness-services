@@ -9,7 +9,7 @@
 	"scripts": {
 		"start": "webpack-dev-server --config webpack.config.dev.js",
 		"build": "webpack --config webpack.config.prod.js",
-		"start:netlify": "netlify dev"
+		"start:live-server": "netlify dev"
 	},
 	"devDependencies": {
 		"clean-webpack-plugin": "^4.0.0",

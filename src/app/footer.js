@@ -12,17 +12,17 @@ export const renderFooter = () => {
 
 				<ul class="nav-links">
 					<li class="list">
-						<a href="/" class="link">About</a>
+						<a href="/about" class="link">About</a>
 					</li>
 					<li class="list">
-						<a href="/" class="link">Services</a>
+						<a href="/programs" class="link">Programs</a>
 					</li>
 					<li class="list">
-						<a href="/" class="link">Blog & Articles</a>
+						<a href="/blog" class="link">Blog & Articles</a>
 					</li>
 
 					<li class="list">
-						<a href="/" class="link">Contact</a>
+						<a href="/contact" class="link">Contact</a>
 					</li>
 				</ul>
 
