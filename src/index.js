@@ -9,6 +9,7 @@ import { triggerSwiper } from './app/swiper';
 import { redirectToServicesPage } from './app/app';
 import { showAboutInfo } from './app/about-modal';
 import { renderBlogArticles } from './app/blog';
+import { renderAndReadBlog } from './app/render-blog';
 
 renderNav();
 renderFooter();
@@ -18,3 +19,4 @@ triggerSwiper();
 redirectToServicesPage();
 showAboutInfo();
 renderBlogArticles();
+renderAndReadBlog();

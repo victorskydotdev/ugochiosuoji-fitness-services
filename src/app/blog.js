@@ -26,7 +26,7 @@ export const renderBlogArticles = async () => {
 			console.log('fields object:', fields);
 
 			return {
-				id: post.sys.id,
+				blogId: post.sys.id,
 				blogTitle: fields.blogTitle,
 				article: fields.blogArticle,
 				author: fields.author,
@@ -36,11 +36,12 @@ export const renderBlogArticles = async () => {
 		});
 
 		// console.log(assetMap);
+		// sessionStorage.setItem('blogPosts', JSON.stringify(blogPost));
 
 		const blogTemplate = () => {
 			return blogPost
 				.map(
-					(post) => `
+					(post, index) => `
           <div class="blog-card">
 					<div class="img-wrap">
 						<img src="${post.image}" alt="" class="img" />
@@ -48,13 +49,13 @@ export const renderBlogArticles = async () => {
 
 					<div class="text-wrap">
 						<h3 class="title">${post.blogTitle}</h3>
-						<p class="text">
-							${post.article}
+						<!-- <p class="text">
+							${post.article.substring(0, 30)}
 							minima.
-						</p>
+						</p> -->
 
 						<div class="btn-wrap">
-							<button class="read-blog-btn">
+							<button class="read-blog-btn" data-id="${post.blogId}" data-index=${index}>
 								Read more <i class="fa-solid fa-arrow-right"></i>
 							</button>
 						</div>
@@ -67,7 +68,26 @@ export const renderBlogArticles = async () => {
 
 		articlesWrap.innerHTML = blogTemplate();
 
-		console.log(blogPost);
+		const readBlogBtn = document.querySelectorAll('.read-blog-btn');
+
+		if (!readBlogBtn) return;
+
+		readBlogBtn.forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const blogBtnId = btn.dataset.id;
+				const blogIndex = btn.dataset.index;
+
+				const clickedPost = blogPost.find((post) => post.blogId === blogBtnId);
+
+				sessionStorage.setItem('clickedPost', JSON.stringify(clickedPost));
+
+				console.log(clickedPost);
+
+				window.location.href = 'blog/blog-post.html';
+			});
+		});
+
+		// console.log(blogBtnId);
 	} catch (error) {
 		console.log('error:', error);
 	}

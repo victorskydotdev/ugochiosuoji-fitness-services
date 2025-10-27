@@ -11,7 +11,7 @@ export const renderNav = () => {
 						<div class="icon">
 							<i class="fa-solid fa-phone-volume"></i>
 						</div>
-						<p class="phone">+2348100784622</p>
+						<p class="phone">+234 909 472 9411</p>
 					</div>
 
 					<div class="wrap">
@@ -70,8 +70,6 @@ export const renderNav = () => {
 					</button>
 				</div>
 			</nav>
-
-			
     `;
 	};
 

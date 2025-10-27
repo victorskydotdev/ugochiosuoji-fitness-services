@@ -11,9 +11,9 @@ exports.handler = async (event, context) => {
 
 	const endPoint = `https://cdn.contentful.com/spaces/${spaceId}/environments/${environment}/entries?access_token=${accessToken}&content_type=products&include=1`;
 
-	// console.log(
-	// 	`AccessToken inside the handler Code Block: ${accessToken}, SpaceId: ${spaceId}, environment: ${environment}`
-	// );
+	console.log(
+		`AccessToken inside the handler Code Block: ${accessToken}, SpaceId: ${spaceId}, environment: ${environment}`
+	);
 
 	try {
 		const res = await fetch(endPoint);
