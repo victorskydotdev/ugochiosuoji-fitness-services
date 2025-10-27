@@ -10,6 +10,7 @@ import { redirectToServicesPage } from './app/app';
 import { showAboutInfo } from './app/about-modal';
 import { renderBlogArticles } from './app/blog';
 import { renderAndReadBlog } from './app/render-blog';
+import { triggerForm } from './app/submit-form';
 
 renderNav();
 renderFooter();
@@ -20,3 +21,4 @@ redirectToServicesPage();
 showAboutInfo();
 renderBlogArticles();
 renderAndReadBlog();
+triggerForm();

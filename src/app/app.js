@@ -107,6 +107,50 @@ const triggerProducts = () => {
 								);
 								const learnMoreBtn =
 									document.querySelectorAll('.learn-more-btn');
+
+								const paymentBtn = document.querySelector('.payment-btn');
+
+								const paymentEndpoint = `/.netlify/functions/payments`;
+
+								paymentBtn.addEventListener('click', async () => {
+									const email = 'customer@email.com';
+									const amount = 5000; // Naira
+
+									// 1️⃣ Call your backend to initialize the transaction
+									const response = await fetch(paymentEndpoint, {
+										method: 'POST',
+										headers: { 'Content-Type': 'application/json' },
+										body: JSON.stringify({ email, amount }),
+									});
+
+									const data = await response.json();
+
+									console.log(data);
+
+									if (data.status && data.data.authorization_url) {
+										// 2️⃣ Open Paystack inline checkout
+										const handler = PaystackPop.setup({
+											key: 'pk_test_xxxxxxxxxx', // Your Paystack PUBLIC key
+											email: email,
+											amount: amount * 100,
+											ref: data.data.reference, // Use reference from backend
+											callback: function (response) {
+												console.log('Payment complete!', response);
+												// Optionally verify payment here
+												alert(
+													'Payment successful! Reference: ' + response.reference
+												);
+											},
+											onClose: function () {
+												alert('Transaction was not completed, window closed.');
+											},
+										});
+
+										handler.openIframe();
+									} else {
+										alert('Failed to initialize transaction.');
+									}
+								});
 							} else {
 								console.log('Nothing to show in the DOM');
 							}
