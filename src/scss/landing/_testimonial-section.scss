@@ -105,7 +105,7 @@
 	.before-after {
 		background: rgba(188, 248, 22, 0.568);
 		width: 100%;
-		padding: 6em;
+		padding: 6em 0;
 
 		.wrap {
 			display: grid;
@@ -117,11 +117,25 @@
 			}
 		}
 
+		@media screen and (min-width: 43em) {
+			.wrap {
+				width: 80%;
+				margin: 0 auto;
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+
 		@media screen and (min-width: 62em) {
 			.wrap {
 				// grid-template-columns: repeat(4, 1fr);
+				width: 95%;
 				display: flex;
 				gap: 1em;
+
+				.baf-img {
+					object-fit: contain;
+				}
 			}
 		}
 	}

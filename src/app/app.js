@@ -1,3 +1,8 @@
+import 'ldrs/ring';
+
+import { waveform } from 'ldrs';
+waveform.register();
+
 const programBtns = document.querySelectorAll('.programs-btn'); // all "see programs" button elements
 
 // function to redirect users and visitors to the programs page when the button is clicked
@@ -22,168 +27,210 @@ const triggerProducts = () => {
 		window.addEventListener('DOMContentLoaded', async () => {
 			try {
 				const response = await fetch(serverEndPoint);
+				if (!response.ok) return;
 
-				if (!response.ok) {
-					return;
-				} else {
-					const data = await response.json();
-					console.log(data.data.items);
+				const data = await response.json();
+				const assets = data.data.includes.Asset;
 
-					const assets = data.data.includes.Asset;
-					// console.log(`assets:`, assets);
+				const categoryId = data.data.items.flatMap((item) =>
+					item.metadata.tags.map((tag) => tag.sys.id)
+				);
 
-					const categoryId = data?.data?.items?.flatMap((item) => {
-						return item?.metadata?.tags?.map((tag) => tag.sys.id);
-					});
+				// Render product cards
+				productCards.forEach((card) => {
+					const id = card.dataset.tagId;
 
-					productCards.forEach((card, index) => {
-						const id = card.dataset.tagId;
+					if (categoryId.includes(id)) {
+						const matchedItems = data.data.items.filter((products) =>
+							products.metadata.tags.some((tag) => tag.sys.id === id)
+						);
 
-						// console.log(
-						// 	'Category Id from Contentful:',
-						// 	categoryId,
-						// 	'data Id from the DOM:',
-						// 	id
-						// );
+						const productWithImages = matchedItems.map((item) => {
+							const f = item.fields;
+							const imageLinkId = f.productImage?.[0]?.sys?.id;
+							const asset = assets.find((a) => a.sys.id === imageLinkId);
+							const imageUrl = asset ? `https:${asset.fields.file.url}` : null;
 
-						if (categoryId.includes(id)) {
-							const matchedItems = data.data.items.filter((products) => {
-								return products.metadata.tags.some((tag) => tag.sys.id === id);
-							});
+							return {
+								id: item.sys.id,
+								title: f.productTitle,
+								description: f.productDescription,
+								price: f.productPrice,
+								slug: f.slug,
+								image: imageUrl,
+							};
+						});
 
-							const productWithImages = matchedItems.map((item) => {
-								const f = item.fields;
-								const imageLinkId = f.productImage?.[0]?.sys?.id;
+						// Insert products into DOM
+						card.innerHTML = productWithImages
+							.map(
+								(product) => `
+            <div class="container" data-category="${id}">
+              <div class="img-wrap">
+                <img src="${product.image}" alt="${product.title}" />
+              </div>
+              <div class="text-wrap">
+                <h1>${product.title}</h1>
+                <p class="description">${product.description || ''}</p>
+                <p class="price">N${product.price || ''}</p>
 
-								// Find the matching asset to get the actual file URL
-								const asset = assets.find((a) => a.sys.id === imageLinkId);
-								const imageUrl = asset
-									? `https:${asset.fields.file.url}`
-									: null;
+                <div class="btn-wrap">
+                  <button class="program-select-btn" 
+										data-product-title="${product.title}" 
+										data-product-price="${product.price}" 
+										data-product-id="${product.id}">
+										Buy program
+									</button>
 
-								return {
-									id: item.sys.id,
-									title: f.productTitle,
-									description: f.productDescription,
-									price: f.productPrice,
-									slug: f.slug,
-									image: imageUrl, // Correct URL from includes.Asset
-									raw: item, // Keep raw entry if needed
-								};
-							});
+                  <!-- <button class="learn-more-btn">Learn more</button> -->
+                </div>
+              </div>
+            </div>
+          `
+							)
+							.join('');
+					}
+				});
 
-							// console.log('products with images:', productWithImages);
+				// we are attaching a single click logic using event delegation
+				document.addEventListener('click', (e) => {
+					const buyButton = e.target.closest('.program-select-btn');
 
-							if (card) {
-								card.innerHTML = productWithImages
-									.map((product, index) => {
-										return `
-												<div class="container" data-category="${id}">
-													<div class="img-wrap">
-														<img src="${product.image}" alt="${product.title}" />
-													</div>
+					if (!buyButton) return;
 
-													<div class="text-wrap">
-														<h1>${product.title}</h1>
+					const productName = buyButton.dataset.productTitle;
+					const productPrice = parseInt(buyButton.dataset.productPrice);
+					const productId = buyButton.dataset.productId;
 
-														<p class="description">${product.description || ''}</p>
+					// form logic goes here, which would appear first to collect the necessary data like email address to send to admin email after payment has been successful
 
-														<p class="price">N${product.price || ''}</p>
+					const paymentFormModal = document.querySelector(
+						'.payment-form-modal'
+					);
 
-														<div class="btn-wrap">
-															<button data-btn-id="${index}" class="program-select-btn">Buy program</button>
-															
-															<button data-btn-id="${index}" class="learn-more-btn">Learn more</button>
-														</div>
-													</div>
-												</div>
-											`;
-									})
-									.join('');
+					// show form modal when the buy program button is clicked
+					paymentFormModal.classList.add('show-payment-form');
 
-								// declaring button variables to be able to trigger purchase and learn more functionalities on buttonClick events
-								const buyProgBtn = document.querySelector(
-									'.program-select-btn'
-								);
-								const learnMoreBtn =
-									document.querySelectorAll('.learn-more-btn');
+					// payment form which is nested inside the payment modal
+					const paymentForm = document.querySelector('.payment-form');
+					const submitBtn = document.querySelector('.payment-btn-wrap');
 
-								const paymentBtn = document.querySelector('.payment-btn');
+					// trigger user info collection onSubmit and then store it to be used after payments have been made
+					if (!paymentForm) return;
+					paymentForm.addEventListener('submit', (event) => {
+						event.preventDefault();
 
-								const paymentEndpoint = `/.netlify/functions/payments`;
+						const formData = new FormData(event.target);
 
-								paymentBtn.addEventListener('click', async () => {
-									const email = 'customer@email.com';
-									const amount = 5000; // Naira
+						const jsonData = {};
 
-									// 1️⃣ Call your backend to initialize the transaction
-									const response = await fetch(paymentEndpoint, {
-										method: 'POST',
-										headers: { 'Content-Type': 'application/json' },
-										body: JSON.stringify({ email, amount }),
+						for (const [key, value] of formData.entries()) {
+							jsonData[key] = value;
+						} // form info are being stored up using jsonData{} to be submitted after payments
+
+						const loaderTemplate = () => {
+							return `
+								<div class="btn-wrap">
+									<button class="btn">
+										<div class="container">
+											<div class="bar"></div>
+											<div class="bar"></div>
+											<div class="bar"></div>
+											<div class="bar"></div>
+										</div>
+									</button>
+								</div>
+							`;
+						};
+
+						submitBtn.innerHTML = loaderTemplate();
+
+						// payment notification endpoint
+						const endpoint = `/.netlify/functions/prod-purchase-notification`;
+
+						const clientEmail = jsonData.email; // storing client email as we would use it with regards to initializing payment
+
+						const initializePayment = async (e) => {
+							if (paymentFormModal && buyButton) {
+								const email = clientEmail;
+								const amount = productPrice;
+
+								const response = await fetch('/.netlify/functions/payments', {
+									method: 'POST',
+									headers: { 'Content-Type': 'application/json' },
+									body: JSON.stringify({ email, amount }),
+								});
+
+								const fetchedData = await response.json();
+								// console.log(fetchedData?.data);
+								// console.log(fetchedData?.publicKey);
+								// console.log(
+								// 	'this is the fetchedData payment authorization status:',
+								// 	fetchedData.data.authorization_url
+								// );
+
+								// fetchedData.status && fetchedData.data.authorization_url
+
+								if (fetchedData) {
+									const handler = PaystackPop.setup({
+										key: fetchedData?.publicKey, // Your Paystack PUBLIC key
+										email: email,
+										amount: amount * 100,
+										ref: fetchedData.data.reference, // Use reference from backend
+
+										callback: function (response) {
+											console.log('Payment complete!', response);
+
+											// Optionally verify payment here
+											// alert(
+											// 	'Payment successful! Reference: ' + response.reference
+											// );
+
+											const sendFormData = async (e) => {
+												console.log(
+													'Json data from the payment notification logic:',
+													jsonData
+												);
+												try {
+													const response = await fetch(endpoint, {
+														method: 'POST',
+														headers: {
+															'Content-Type': 'application/json',
+														},
+
+														body: JSON.stringify(jsonData),
+													});
+
+													if (!response.ok) {
+														alert(
+															'Form not submitted. Call this number to validate your order'
+														);
+													} else {
+														alert('Your order is complete!');
+
+														window.location.href = '/';
+													}
+												} catch (error) {
+													console.log('Error:', error);
+												}
+											};
+
+											sendFormData();
+										},
+
+										onClose: function () {
+											alert('Transaction was not completed, window closed.');
+										},
 									});
 
-									const data = await response.json();
-
-									console.log(data);
-
-									if (data.status && data.data.authorization_url) {
-										// 2️⃣ Open Paystack inline checkout
-										const handler = PaystackPop.setup({
-											key: 'pk_test_xxxxxxxxxx', // Your Paystack PUBLIC key
-											email: email,
-											amount: amount * 100,
-											ref: data.data.reference, // Use reference from backend
-											callback: function (response) {
-												console.log('Payment complete!', response);
-												// Optionally verify payment here
-												alert(
-													'Payment successful! Reference: ' + response.reference
-												);
-											},
-											onClose: function () {
-												alert('Transaction was not completed, window closed.');
-											},
-										});
-
-										handler.openIframe();
-									} else {
-										alert('Failed to initialize transaction.');
-									}
-								});
-							} else {
-								console.log('Nothing to show in the DOM');
+									handler.openIframe();
+								} else console.error('Payment logic not working');
 							}
-						}
+						};
 
-						// document.addEventListener('click', (e) => {
-						// 	const firstBtn = e.target.closest('.program-select-btn');
-						// 	const secondBtn = e.target.closest('.learn-more-btn');
-
-						// 	alert('Button clicked');
-						// });
-
-						let programClickHandler;
-
-						function attachProgramClickHandler() {
-							if (programClickHandler) {
-								document.removeEventListener('click', programClickHandler);
-							}
-
-							programClickHandler = (e) => {
-								const buyBtn = e.target.closest('.program-select-btn');
-								const learnBtn = e.target.closest('.learn-more-btn');
-
-								if (buyBtn) console.log('Buy:', buyBtn.dataset.btnId);
-								if (learnBtn) console.log('Learn:', learnBtn.dataset.btnId);
-							};
-
-							document.addEventListener('click', programClickHandler);
-						}
-
-						attachProgramClickHandler();
+						initializePayment();
 					});
-				}
+				});
 			} catch (error) {
 				console.log('error:', error);
 			}
