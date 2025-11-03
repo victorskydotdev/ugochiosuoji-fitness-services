@@ -83,7 +83,7 @@ export const renderBlogArticles = async () => {
 
 				console.log(clickedPost);
 
-				window.location.href = 'blog/blog-post.html'; // just tried to update this line
+				window.location.href = '/blog-post.html'; // just tried to update this line
 			});
 		});
 
