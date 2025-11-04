@@ -16,13 +16,19 @@ export const renderNav = () => {
 
 					<div class="wrap">
 						<div class="icon">
-							<i class="fa-solid fa-envelope"></i>
+							<a href="mailto:info@ugochiosuoji.com">
+								<i class="fa-solid fa-envelope"></i>
+							</a>
 						</div>
 						<div class="icon">
-							<i class="fa-brands fa-facebook-f"></i>
+							<a href="https://web.facebook.com/ugochi.osuoji" target="_blank">
+								<i class="fa-brands fa-facebook-f"></i>
+							</a>
 						</div>
 						<div class="icon">
-							<i class="fa-brands fa-instagram"></i>
+							<a href="https://www.instagram.com/ugochi_osuoji/" target="_blank">
+								<i class="fa-brands fa-instagram"></i>
+							</a>
 						</div>
 					</div>
 				</div>

@@ -12,7 +12,7 @@
 		.heading-wrap {
 			display: flex;
 			justify-content: center;
-			margin-bottom: 3em;
+			margin-bottom: 5em;
 			position: relative;
 			// background: red;
 
@@ -87,12 +87,37 @@
 			margin-bottom: 4em;
 
 			.review-wrap {
+				width: 100%;
+
 				.quote-icon {
+					// background: red;
+					position: relative;
+					height: 100px;
+
+					.quote {
+						width: 100px;
+						position: absolute;
+						top: 10%;
+						left: -5%;
+						height: 100%;
+					}
 				}
 
 				.text {
 					line-height: 30px;
 					margin-bottom: 1.8em;
+					color: resets.$light-gray;
+				}
+
+				.wrap {
+					.heading {
+						color: resets.$light-green;
+						margin-bottom: 0.3em;
+					}
+
+					.location {
+						color: resets.$dark-green;
+					}
 				}
 			}
 
@@ -133,8 +158,13 @@
 				display: flex;
 				gap: 1em;
 
-				.baf-img {
-					object-fit: contain;
+				.img-wrap {
+					width: 100%;
+					height: 300px;
+
+					.baf-img {
+						object-fit: contain;
+					}
 				}
 			}
 		}

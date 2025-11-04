@@ -49,7 +49,10 @@
 				@include resets.poppins-font();
 				font-size: 14px;
 				font-weight: 500;
-				color: #fff;
+
+				a {
+					color: #fff;
+				}
 			}
 		}
 	}

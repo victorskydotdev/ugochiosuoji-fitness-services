@@ -10,6 +10,8 @@ export const renderFooter = () => {
 					<img src="${footerLogo}" alt="" class="logo-img" />
 				</div>
 
+				
+
 				<ul class="nav-links">
 					<li class="list">
 						<a href="/about" class="link">About</a>
@@ -27,9 +29,23 @@ export const renderFooter = () => {
 				</ul>
 
 				<div class="comms-wrap">
-					<p>Email</p>
-					<p>Facebook</p>
-					<p>Instagram</p>
+					<p>
+						<a href="mailto:info@ugochiosuoji.com">
+							Email
+						</a>
+					</p>
+
+					<p>
+						<a href="https://web.facebook.com/ugochi.osuoji" target="_blank">
+							Facebook
+						</a>
+					</p>
+
+					<p>
+						<a href="https://www.instagram.com/ugochi_osuoji/" target="_blank">
+							Instagram
+						</a>
+					</p>
 				</div>
 			</div>
 
