@@ -247,6 +247,9 @@ const triggerProducts = () => {
 								});
 
 								const fetchedData = await response.json();
+
+								// get to use formData.append("ref", ref) so that we can send more payment MetaData to the email
+
 								// console.log(fetchedData?.data);
 								// console.log(fetchedData?.publicKey);
 								// console.log(
