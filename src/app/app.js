@@ -159,6 +159,18 @@ const triggerProducts = () => {
 
 						setTimeout(() => {
 							learnMoreModal.innerHTML = moreInfoTemplate();
+
+							const closeBtn = document.querySelector('.modal-close-btn');
+
+							if (closeBtn) {
+								closeBtn.addEventListener('click', () => {
+									learnMoreModal.innerHTML = '';
+
+									setTimeout(() => {
+										learnMoreModal.classList.remove('show-more-info');
+									}, 1000);
+								});
+							}
 						}, 1000);
 					} else {
 						console.log('❌ No product found for ID:', productId);
