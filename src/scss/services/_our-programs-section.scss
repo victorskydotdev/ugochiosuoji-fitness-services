@@ -48,11 +48,12 @@
 						height: 250px;
 						border: 2px solid #bbb;
 						border-radius: 15px;
+						overflow: hidden;
 
 						img {
 							width: 100%;
 							height: 100%;
-							object-fit: contain;
+							object-fit: cover;
 							border-radius: 15px;
 						}
 					}
@@ -60,14 +61,15 @@
 					.text-wrap {
 						h1 {
 							font-size: 1.1rem;
+							margin-bottom: 1em;
 						}
 
-						.description {
-							margin-bottom: 0.5em;
-						}
+						// .description {
+						// 	margin-bottom: 0.5em;
+						// }
 
 						.price {
-							margin-bottom: 0.5em;
+							margin-bottom: 1em;
 						}
 
 						.btn-wrap {
@@ -121,6 +123,30 @@
 			}
 
 			@media screen and (min-width: 43em) {
+				.card {
+					display: grid;
+					grid-template-columns: repeat(2, 1fr);
+
+					.container {
+						width: 100%;
+					}
+
+					.product-card {
+						display: grid;
+						grid-template-columns: repeat(2, 1fr);
+					}
+
+					&:last-child {
+						display: block;
+
+						.product-card {
+							// background: red;
+							display: grid;
+							grid-template-columns: repeat(2, 1fr);
+							gap: 1em;
+						}
+					}
+				}
 			}
 
 			@media screen and (min-width: 62em) {
@@ -129,7 +155,7 @@
 					grid-template-columns: repeat(4, 1fr);
 
 					.container {
-						width: 300px;
+						width: 100%;
 					}
 
 					.product-card {
@@ -141,8 +167,10 @@
 						display: block;
 
 						.product-card {
+							// background: red;
 							display: grid;
 							grid-template-columns: repeat(4, 1fr);
+							gap: 1em;
 
 							.text-wrap {
 								margin-bottom: 2em;

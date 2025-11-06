@@ -3,7 +3,15 @@ import 'ldrs/ring';
 import { waveform } from 'ldrs';
 waveform.register();
 
+import { marked } from 'marked';
+
+marked.setOptions = {
+	breaks: true,
+	gfm: true,
+};
+
 const programBtns = document.querySelectorAll('.programs-btn'); // all "see programs" button elements
+const learnMoreModal = document.querySelector('.learn-more-modal');
 
 // function to redirect users and visitors to the programs page when the button is clicked
 export const redirectToServicesPage = () => {
@@ -30,6 +38,9 @@ const triggerProducts = () => {
 				if (!response.ok) return;
 
 				const data = await response.json();
+				console.log(data);
+
+				// getting and mapping the media files for Contentful's images and media files
 				const assets = data.data.includes.Asset;
 
 				const categoryId = data.data.items.flatMap((item) =>
@@ -61,6 +72,8 @@ const triggerProducts = () => {
 							};
 						});
 
+						sessionStorage.setItem('storeProducts', productWithImages);
+
 						// Insert products into DOM
 						card.innerHTML = productWithImages
 							.map(
@@ -71,7 +84,8 @@ const triggerProducts = () => {
               </div>
               <div class="text-wrap">
                 <h1>${product.title}</h1>
-                <p class="description">${product.description || ''}</p>
+                
+
                 <p class="price">N${product.price || ''}</p>
 
                 <div class="btn-wrap">
@@ -82,13 +96,72 @@ const triggerProducts = () => {
 										Buy program
 									</button>
 
-                  <!-- <button class="learn-more-btn">Learn more</button> -->
+                  <button class="learn-more-btn" data-product-title="${
+										product.title
+									}" 
+										data-product-price="${product.price}"  data-product-id="${
+									product.id
+								}">Learn more</button>
                 </div>
               </div>
             </div>
           `
 							)
 							.join('');
+					}
+				});
+
+				document.addEventListener('click', (e) => {
+					const learnMoreBtn = e.target.closest('.learn-more-btn');
+
+					if (!learnMoreBtn && !learnMoreModal) return;
+
+					// fetch button id
+					const productId = learnMoreBtn.dataset.productId;
+
+					const clickedProdId = data.data.items.find((item) => {
+						return item.sys.id === productId;
+					});
+
+					if (clickedProdId) {
+						console.log('✅ Found matching product:', clickedProdId);
+
+						const productTitle = clickedProdId.fields.productTitle;
+						const productDescription = marked(
+							clickedProdId.fields.productDescription
+						);
+						const productImage = clickedProdId.fields.productImage;
+
+						const moreInfoTemplate = (e) => {
+							return `
+								<div class='container'>
+									
+									
+									<div class='wrap'>
+										<h3 class='heading'>${productTitle}</h3>
+
+										<div class='info'>${productDescription}</div>
+
+										<div class="btn-wrap">
+											<button class="modal-close-btn">
+												<!-- <i class="fa-solid fa-xmark"></i> -->
+												Continue shopping
+											</button>
+										</div>
+									</div>
+
+									
+								</div>
+							`;
+						};
+
+						learnMoreModal.classList.add('show-more-info');
+
+						setTimeout(() => {
+							learnMoreModal.innerHTML = moreInfoTemplate();
+						}, 1000);
+					} else {
+						console.log('❌ No product found for ID:', productId);
 					}
 				});
 

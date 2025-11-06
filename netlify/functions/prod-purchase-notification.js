@@ -30,9 +30,12 @@ exports.handler = async (event, context) => {
 		const response = await mg.messages().send({
 			from: `Contact form <admin@${DOMAIN}>`,
 			to: adminEmail,
-			subject: 'Contact Form Submission',
+			subject: 'Product Purchase Notification',
 
 			html: `
+				<h4>Hello Ugochi,</h4>
+				<p>A customer has paid for one of your products, info below.</p>
+
 				<h1>Customer Info:</h1> <br />
 		    <strong>Name of customer:</strong> ${name},
 		    <strong>Customer Email:</strong> ${email},
