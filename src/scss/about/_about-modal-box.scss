@@ -12,7 +12,7 @@
 	transition: transform 1500ms cubic-bezier(0.4, 0, 0.2, 1);
 	transform: translateY(-100%);
 	backdrop-filter: blur(15px);
-	padding: 5em 0;
+	padding: 2em 0 5em 0;
 	overflow-y: auto;
 
 	.container {
@@ -20,10 +20,47 @@
 		margin: 0 auto;
 		opacity: 0;
 		transition: all 1000ms ease-in !important;
-
 		display: grid;
 		gap: 1em;
 		margin-bottom: 2em;
+
+		.modal-img-wrap {
+			display: flex;
+			gap: 0.5em;
+
+			.wrap {
+				width: 100%;
+				height: 300px;
+
+				.img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					border-radius: 20px;
+					object-position: top;
+				}
+
+				&:nth-child(2) {
+					display: none;
+				}
+			}
+
+			@media screen and (min-width: 43em) {
+				max-width: 80%;
+
+				.wrap {
+					height: 400px;
+
+					.img {
+						object-position: top;
+					}
+				}
+			}
+
+			@media screen and (min-width: 62em) {
+				display: none;
+			}
+		}
 
 		.text {
 			color: #fff;

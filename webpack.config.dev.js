@@ -22,4 +22,24 @@ module.exports = merge(commonConfig, {
 		path: path.resolve(__dirname, 'dist'),
 		// clean: true,
 	},
+
+	module: {
+		rules: [
+			// {
+			// 	test: /\.scss$/,
+			// 	use: [
+			// 		MiniCssExtractPlugin.loader, // adding this here for production purpases to extract css into files
+
+			// 		'css-loader', // Translates CSS into CommonJS
+
+			// 		'sass-loader', // Compiles Sass to CSS
+			// 	],
+			// },
+
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader'],
+			},
+		],
+	},
 });

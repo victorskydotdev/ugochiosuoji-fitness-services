@@ -11,6 +11,7 @@ import { showAboutInfo } from './app/about-modal';
 import { renderBlogArticles } from './app/blog';
 import { renderAndReadBlog } from './app/render-blog';
 import { triggerForm } from './app/submit-form';
+import { triggerCarousel } from './app/carousel';
 
 renderNav();
 renderFooter();
@@ -22,3 +23,5 @@ showAboutInfo();
 renderBlogArticles();
 renderAndReadBlog();
 triggerForm();
+
+triggerCarousel();

@@ -4,15 +4,17 @@
 	// display: none;
 	margin-bottom: 10em;
 	padding-top: 7em;
+	overflow-x: hidden;
 
 	.container {
+		// background: orange;
+
 		width: 90%;
 		margin: 0 auto;
-
 		.heading-wrap {
 			display: flex;
 			justify-content: center;
-			margin-bottom: 5em;
+			margin-bottom: 2em;
 			position: relative;
 			// background: red;
 
@@ -21,7 +23,6 @@
 				color: resets.$grey();
 
 				text-align: center;
-				// background: teal;
 			}
 
 			.rating-img1 {
@@ -80,50 +81,53 @@
 			}
 		}
 
-		.wrapper {
+		.carousel {
 			display: grid;
-			gap: 2em;
-			// background: red;
 			margin-bottom: 4em;
 
-			.review-wrap {
-				width: 100%;
-
-				.quote-icon {
+			.swiper-wrapper {
+				.swiper-slide {
 					// background: red;
-					position: relative;
-					height: 100px;
+					padding: 2em;
 
-					.quote {
-						width: 100px;
-						position: absolute;
-						top: 10%;
-						left: -5%;
-						height: 100%;
-					}
-				}
+					.review-wrap {
+						.quote-icon {
+							// background: red;
+							position: relative;
+							height: 100px;
 
-				.text {
-					line-height: 30px;
-					margin-bottom: 1.8em;
-					color: resets.$light-gray;
-				}
+							.quote {
+								width: 100px;
+								position: absolute;
+								top: 10%;
+								left: -5%;
+								height: 100%;
+							}
+						}
 
-				.wrap {
-					.heading {
-						color: resets.$light-green;
-						margin-bottom: 0.3em;
-					}
+						.text {
+							line-height: 30px;
+							margin-bottom: 1.8em;
+							color: resets.$light-gray;
+						}
 
-					.location {
-						color: resets.$dark-green;
+						.wrap {
+							.heading {
+								color: resets.$light-green;
+								margin-bottom: 0.3em;
+							}
+
+							.location {
+								color: resets.$dark-green;
+							}
+						}
 					}
 				}
 			}
 
-			@media screen and (min-width: 62em) {
-				display: flex;
-			}
+			// @media screen and (min-width: 62em) {
+			// 	display: flex;
+			// }
 		}
 	}
 

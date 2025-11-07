@@ -1,5 +1,7 @@
 const readMoreBtn = document.querySelector('.read-more-btn');
 const aboutModalBox = document.querySelector('.about-modal-box');
+import imageOne from '../media/pro-img2.JPG';
+import imageTwo from '../media/pro-img3.JPG';
 
 export const showAboutInfo = () => {
 	if (!readMoreBtn) return;
@@ -7,9 +9,18 @@ export const showAboutInfo = () => {
 	const template = () => {
 		return `
         <div class="container">
+          <div class="modal-img-wrap">
+            <div class="wrap">
+              <img src="${imageOne}" class="img" alt="" />
+            </div>
+            <div class="wrap">
+              <img src="${imageTwo}" class="img" alt="" />
+            </div>
+          </div>
+
           <p class="text">That spark lit by my sister became a fire. Over the years, I grew to love the discipline, strength, and confidence that fitness brings. It became more than just exercise — it became a way of life, a means of worship, and a tool to equip me for my assignments in life.
           </p>
-         
+
           <p class="text">Another huge influence was my upbringing. I was raised by two teachers who instilled in me the value of hard work, continuous learning, and the responsibility to teach and share knowledge with others. That background shaped how I now approach fitness — not just as a coach, but as a teacher, motivator, and guide
           </p>
          
