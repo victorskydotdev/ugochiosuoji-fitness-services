@@ -3,8 +3,9 @@
 .testimonial-section {
 	// display: none;
 	margin-bottom: 10em;
-	padding-top: 7em;
+	padding-top: 8em;
 	overflow-x: hidden;
+	// position: relative;
 
 	.container {
 		// background: orange;
@@ -84,50 +85,70 @@
 		.carousel {
 			display: grid;
 			margin-bottom: 4em;
+			cursor: pointer;
 
 			.swiper-wrapper {
 				.swiper-slide {
-					// background: red;
 					padding: 2em;
+					background: rgb(245, 241, 241);
+					border-radius: 20px;
+					box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.349);
+					cursor: grabbing;
 
-					.review-wrap {
-						.quote-icon {
-							// background: red;
-							position: relative;
-							height: 100px;
+					.quote-icon {
+						position: relative;
+						height: 100px;
 
-							.quote {
-								width: 100px;
-								position: absolute;
-								top: 10%;
-								left: -5%;
-								height: 100%;
-							}
+						.quote {
+							width: 100px;
+							position: absolute;
+							top: 10%;
+							left: -5%;
+							height: 100%;
+						}
+					}
+
+					.text {
+						line-height: 30px;
+						margin-bottom: 1.8em;
+						color: resets.$light-gray;
+					}
+
+					.wrap {
+						.heading {
+							color: resets.$light-green;
+							margin-bottom: 0.3em;
 						}
 
-						.text {
-							line-height: 30px;
-							margin-bottom: 1.8em;
-							color: resets.$light-gray;
-						}
-
-						.wrap {
-							.heading {
-								color: resets.$light-green;
-								margin-bottom: 0.3em;
-							}
-
-							.location {
-								color: resets.$dark-green;
-							}
+						.location {
+							color: resets.$dark-green;
 						}
 					}
 				}
 			}
 
-			// @media screen and (min-width: 62em) {
-			// 	display: flex;
+			// .swiper-button-prev,
+			// .swiper-button-next {
+			// 	position: absolute !important;
+			// 	top: 50% !important;
+			// 	// height: 300px !important;
+			// 	// transform: translateY(-50%);
+			// 	// color: var(--swiper-theme-color, #ff8800);
 			// }
+
+			.swiper-button-prev {
+				left: 50% !important;
+				// transform: translateX(-80%) !important;
+				--swiper-theme-color: #ff8800;
+				display: none;
+			}
+
+			.swiper-button-next {
+				left: 50% !important;
+				// transform: translateX(-80%) !important;
+				--swiper-theme-color: #ff8800;
+				display: none;
+			}
 		}
 	}
 
