@@ -3,6 +3,7 @@
 .header {
 	background: #fff;
 	position: relative;
+	z-index: 2;
 
 	.top-nav {
 		background: resets.$light-green;
@@ -105,17 +106,29 @@
 			}
 		}
 
-		.hamburger {
-			padding-right: 2em;
+		.nav-btns-wrap {
+			display: flex;
+			align-items: center;
+			gap: 2em;
 
-			.burger {
-				background: transparent;
-				border: none;
-				cursor: pointer;
+			.book-now-wrap {
+				.book-now-btn {
+					@include resets.primary-btn();
+				}
+			}
 
-				i {
-					font-size: 1.8rem;
-					color: resets.$dark-green;
+			.hamburger {
+				// padding-right: 2em;
+
+				.burger {
+					background: transparent;
+					border: none;
+					cursor: pointer;
+
+					i {
+						font-size: 1.8rem;
+						color: resets.$dark-green;
+					}
 				}
 			}
 		}
@@ -123,7 +136,7 @@
 		@media screen and (min-width: 62em) {
 			width: 80%;
 			justify-content: space-between;
-			padding-right: 5em;
+			// padding-right: 5em;
 
 			.nav-links {
 				all: unset;

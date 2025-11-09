@@ -1,7 +1,7 @@
 import './scss/global/main.scss';
 
 // importing dynamic templates for navbar and footer
-import { renderNav } from './app/navbar';
+import { triggerNavbarLogic } from './app/navbar';
 import { renderFooter } from './app/footer';
 import { accordionFunc } from './app/accordion';
 import { pageTransition } from './app/page-transition';
@@ -13,7 +13,7 @@ import { renderAndReadBlog } from './app/render-blog';
 import { triggerForm } from './app/submit-form';
 import { triggerCarousel } from './app/carousel';
 
-renderNav();
+triggerNavbarLogic();
 renderFooter();
 accordionFunc();
 pageTransition();

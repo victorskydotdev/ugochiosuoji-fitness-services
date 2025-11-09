@@ -1,6 +1,6 @@
 import logo from '../media/ugochi-logo.png';
 
-export const renderNav = () => {
+const renderNav = () => {
 	const header = document.querySelector('.header');
 
 	const navTemplate = (cb) => {
@@ -70,10 +70,16 @@ export const renderNav = () => {
 					</div>
 				</ul>
 
-				<div class="hamburger">
-					<button class="burger">
-						<i class="fa-solid fa-bars"></i>
-					</button>
+				<div class="nav-btns-wrap">
+					<div class="book-now-wrap">
+						<button class="book-now-btn">Book Ugochi</button>
+					</div>
+
+					<div class="hamburger">
+						<button class="burger">
+							<i class="fa-solid fa-bars"></i>
+						</button>
+					</div>
 				</div>
 			</nav>
     `;
@@ -129,4 +135,136 @@ export const renderNav = () => {
 		// 	}
 		// });
 	}
+};
+
+// writing the book now button logic and form handling functionality
+const bookNowFormTemplate = (e) => {
+	return `
+		
+			<div class="container">
+				<div class="wrap">
+					<div class="form-masthead">
+						<h3 class="heading">Book a fitness consultation</h3>
+					</div>
+
+					<form name="fitness-booking-form" class="book-now-form">
+						<div class="input-group">
+							<label for="name" class="label">Name</label>
+							<input
+								type="text"
+								name="name"
+								id="name"
+								class="input-field"
+								placeholder="Enter your name"
+								required />
+						</div>
+
+						<div class="input-group">
+							<label for="email" class="label">Email</label>
+							<input
+								type="email"
+								name="email"
+								id="email"
+								class="input-field"
+								placeholder="Enter your email"
+								required />
+						</div>
+
+						<div class="input-group">
+							<label for="app" class="label">Appointment category</label>
+
+							<select name="ReasonForAppointment" id="fruit-select">
+								<option value="">--Please choose an option--</option>
+								<option value="apple">Fitness</option>
+								<option value="banana"></option>
+								<option value="cherry">Cherry</option>
+								<option value="grape">Grape</option>
+							</select>
+						</div>
+
+						<div class="input-group">
+							<label for="message" class="label">Additional message</label>
+							<textarea
+								name="additionMessage"
+								id="message"
+								class="input-field textarea-field"
+								placeholder="Write your message here..."
+								rows="5"
+								required></textarea>
+						</div>
+
+						<div class="btn-wrap payment-btn-wrap">
+							<button type="submit" class="btn payment-submit-btn submit-btn">
+								Book now
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+	
+	`;
+};
+
+const bookNowModal = document.querySelector('.book-now-modal');
+
+const bookNow = () => {
+	document.addEventListener('click', (e) => {
+		const bookNowBtn = e.target.closest('.book-now-btn');
+
+		if (bookNowBtn) {
+			bookNowModal.classList.add('show-booknow-form');
+
+			setTimeout(() => {
+				bookNowModal.innerHTML = bookNowFormTemplate();
+
+				const bookNowForm = document.querySelector('.book-now-form');
+
+				if (!bookNowForm) return;
+
+				bookNowForm.addEventListener('submit', async (e) => {
+					e.preventDefault();
+
+					const formData = new FormData(e.target);
+
+					const jsonData = {};
+
+					for (const [key, value] of formData.entries()) {
+						jsonData[key] = value;
+					}
+
+					const endPoint = '/.netlify/functions/send-appointment-data';
+
+					try {
+						const res = await fetch(endPoint, {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify(jsonData),
+						});
+
+						if (!res.ok) return;
+
+						const fetchedData = await res.json();
+
+						console.log(fetchedData);
+
+						alert(
+							'Thank you for reaching out! Your form has been submitted successfully!'
+						);
+
+						location.reload();
+					} catch (error) {
+						console.error('Error:', error);
+					}
+				});
+			}, 1000);
+		}
+	});
+};
+
+export const triggerNavbarLogic = () => {
+	renderNav();
+
+	bookNow();
 };
