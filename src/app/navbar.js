@@ -58,7 +58,7 @@ const renderNav = () => {
 							<a href="/about" class="link">About</a>
 						</li>
 						<li class="list">
-							<a href="/programs" class="link">Programs</a>
+							<a href="/programs" class="link">Programs & Products</a>
 						</li>
 						<li class="list">
 							<a href="/blog" class="link">Blog & Articles</a>
@@ -146,7 +146,7 @@ const bookNowFormTemplate = (e) => {
 				<button class="modal-close-btn">
 					<i class="fa-solid fa-xmark"></i>
 				</button>
-				
+
 				<div class="wrap">
 					<div class="form-masthead">
 						<h3 class="heading">Book a fitness consultation</h3>
