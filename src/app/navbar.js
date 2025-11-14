@@ -140,8 +140,13 @@ const renderNav = () => {
 // writing the book now button logic and form handling functionality
 const bookNowFormTemplate = (e) => {
 	return `
-		
+			
+
 			<div class="container">
+				<button class="modal-close-btn">
+					<i class="fa-solid fa-xmark"></i>
+				</button>
+				
 				<div class="wrap">
 					<div class="form-masthead">
 						<h3 class="heading">Book a fitness consultation</h3>
@@ -171,14 +176,13 @@ const bookNowFormTemplate = (e) => {
 						</div>
 
 						<div class="input-group">
-							<label for="app" class="label">Appointment category</label>
+							<label for="app" class="label">Reason</label>
 
 							<select name="ReasonForAppointment" id="fruit-select">
 								<option value="">--Please choose an option--</option>
-								<option value="apple">Fitness</option>
-								<option value="banana"></option>
-								<option value="cherry">Cherry</option>
-								<option value="grape">Grape</option>
+								<option value="apple">In Person coaching experience</option>
+								<option value="banana">Speaking engagement / workout breakout sessions</option>
+								<option value="cherry">Corporate & Community Wellness Programs</option>
 							</select>
 						</div>
 
@@ -258,7 +262,19 @@ const bookNow = () => {
 						console.error('Error:', error);
 					}
 				});
-			}, 1000);
+
+				document.addEventListener('click', (e) => {
+					const closeButton = e.target.closest('.modal-close-btn');
+
+					if (closeButton) {
+						bookNowModal.innerHTML = '';
+
+						setTimeout(() => {
+							bookNowModal.classList.remove('show-booknow-form');
+						}, 1000);
+					}
+				});
+			}, 500);
 		}
 	});
 };

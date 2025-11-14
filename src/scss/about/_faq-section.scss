@@ -12,11 +12,16 @@
 		.faq-heading-section {
 			display: flex;
 			align-items: center;
-			margin-bottom: 2em;
+
+			margin-bottom: 3em;
 			@include resets.transBeforeElems();
 
 			.img-icon {
 				width: 80px;
+			}
+
+			.heading {
+				font-size: 30px;
 			}
 		}
 
