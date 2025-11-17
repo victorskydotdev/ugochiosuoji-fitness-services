@@ -4,11 +4,10 @@ exports.handler = async (event, context) => {
 	console.log(JSON.parse(event.body));
 
 	try {
-		const { name, email, message, productName, amountPaid } = JSON.parse(
-			event.body
-		);
+		const { name, email, phone, productName, amountPaid, quantity } =
+			JSON.parse(event.body);
 
-		const adminEmail = 'victorsky90@gmail.com';
+		const adminEmail = 'admin@ugochiosuoji.com';
 
 		const DOMAIN = process.env.MAILGUN_DOMAIN;
 
@@ -33,10 +32,13 @@ exports.handler = async (event, context) => {
 				
 
 				<h4>Customer Info:</h4>
-		    <strong>Name of customer:</strong> ${name},
-		    <strong>Customer Email:</strong> ${email},
-		    <strong>Additional Quote Message:</strong> ${message},
-				<strong>Product Purchased:</strong> ${productName}
+		    <strong>Name of customer:</strong> ${name}, <br />
+		    <strong>Customer Email:</strong> ${email}, <br />
+		    <strong>Customer Phone:</strong> ${phone}, <br />
+		    
+				<strong>Product Purchased:</strong> ${productName} <br />
+				<strong>Quantity:</strong> ${quantity} <br />
+				<strong>Total Amount Paid:</strong> ${amountPaid} <br />
 		  `,
 		});
 
@@ -49,9 +51,20 @@ exports.handler = async (event, context) => {
 				subject: 'Successful Product Purchase',
 
 				html: `
-					Hello ${name}, you have successfully purchased ${productName},
+					Hello <strong>${name}</strong>, you have successfully purchased <strong>${quantity}</strong> units of <strong>${productName}</strong>,
 					<br />
-					Thank you.
+
+					Thank you for your purchase. Your order is being processed and a member of our team will reach out to you to confirm your order.
+
+					<br />
+
+					Also, you'll receive or have already received a payment receipt validating your order.
+
+					<br />
+
+					<strong><em>Team, Ugochi Fitness Services</em></strong>
+
+
 				`,
 			});
 		} else console.log('Something happened');

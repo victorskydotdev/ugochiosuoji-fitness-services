@@ -93,10 +93,21 @@
 			<div class="container">
 				<div class="wrap">
 					<div class="form-masthead">
-						<h3 class="heading">Program Order Form</h3>
+						<h3 class="heading">Complete your Program/Product Order</h3>
 					</div>
 
 					<form name="payment-form" class="payment-form">
+						<div class="input-group">
+							<label for="name" class="label">Quantity</label>
+							<input
+								type="number"
+								name="quantity"
+								id="quantity"
+								class="input-field"
+								value="1"
+								placeholder="1" />
+						</div>
+
 						<div class="input-group">
 							<label for="name" class="label">Name</label>
 							<input
@@ -105,6 +116,16 @@
 								id="name"
 								class="input-field"
 								placeholder="Enter your name" />
+						</div>
+
+						<div class="input-group">
+							<label for="email" class="label">Phone</label>
+							<input
+								type="text"
+								name="phone"
+								id="phone"
+								class="input-field"
+								placeholder="Enter your phone" />
 						</div>
 
 						<div class="input-group">
@@ -117,7 +138,7 @@
 								placeholder="Enter your email" />
 						</div>
 
-						<div class="input-group">
+						<!-- <div class="input-group">
 							<label for="message" class="label">Message</label>
 							<textarea
 								name="message"
@@ -125,7 +146,7 @@
 								class="input-field textarea-field"
 								placeholder="Write your message here..."
 								rows="5"></textarea>
-						</div>
+						</div> -->
 
 						<div class="btn-wrap payment-btn-wrap">
 							<button type="submit" class="btn payment-submit-btn submit-btn">

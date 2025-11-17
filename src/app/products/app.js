@@ -237,11 +237,15 @@ const triggerProducts = () => {
 						const endpoint = `/.netlify/functions/prod-purchase-notification`;
 
 						const clientEmail = jsonData.email; // storing client email as we would use it with regards to initializing payment
+						const quantity = parseInt(jsonData.quantity);
+						const price = productPrice * quantity;
+
+						console.log(price);
 
 						const initializePayment = async (e) => {
 							if (paymentFormModal && buyButton) {
 								const email = clientEmail;
-								const amount = productPrice;
+								const amount = price;
 
 								const response = await fetch('/.netlify/functions/payments', {
 									method: 'POST',
@@ -253,7 +257,7 @@ const triggerProducts = () => {
 
 								// get to use formData.append("ref", ref) so that we can send more payment MetaData to the email
 
-								// console.log(fetchedData?.data);
+								console.log(fetchedData?.data);
 								// console.log(fetchedData?.publicKey);
 								// console.log(
 								// 	'this is the fetchedData payment authorization status:',
