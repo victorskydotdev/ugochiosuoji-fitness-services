@@ -1,5 +1,10 @@
 import logo from '../media/ugochi-logo.png';
 
+import 'ldrs/ring';
+
+import { waveform } from 'ldrs';
+waveform.register();
+
 const renderNav = () => {
 	const header = document.querySelector('.header');
 
@@ -140,9 +145,7 @@ const renderNav = () => {
 // writing the book now button logic and form handling functionality
 const bookNowFormTemplate = (e) => {
 	return `
-			
-
-			<div class="container">
+			<div class="wrapper" id="inner-container">
 				<button class="modal-close-btn">
 					<i class="fa-solid fa-xmark"></i>
 				</button>
@@ -160,8 +163,8 @@ const bookNowFormTemplate = (e) => {
 								name="name"
 								id="name"
 								class="input-field"
-								placeholder="Enter your name"
-								required />
+								placeholder="Enter your name" required
+								 />
 						</div>
 
 						<div class="input-group">
@@ -171,34 +174,34 @@ const bookNowFormTemplate = (e) => {
 								name="email"
 								id="email"
 								class="input-field"
-								placeholder="Enter your email"
-								required />
+								placeholder="Enter your email" required
+								 />
 						</div>
 
 						<div class="input-group">
 							<label for="app" class="label">Reason</label>
 
-							<select name="ReasonForAppointment" id="fruit-select">
-								<option value="">--Please choose an option--</option>
-								<option value="apple">In Person coaching experience</option>
-								<option value="banana">Speaking engagement / workout breakout sessions</option>
-								<option value="cherry">Corporate & Community Wellness Programs</option>
+							<select name="ReasonForAppointment" id="" required>
+								<option value="No_value_selected">--Please choose an option--</option>
+								<option value="In_person_coaching_experience">In Person coaching experience</option>
+								<option value="Speaking_engagement_Workout_breakout_sessions">Speaking engagement / workout breakout sessions</option>
+								<option value="Corporate&Community_Wellness_Program">Corporate & Community Wellness Programs</option>
 							</select>
 						</div>
 
 						<div class="input-group">
 							<label for="message" class="label">Additional message</label>
 							<textarea
-								name="additionMessage"
+								name="additionalMessage"
 								id="message"
 								class="input-field textarea-field"
 								placeholder="Write your message here..."
-								rows="5"
-								required></textarea>
+								rows="5" required
+								></textarea>
 						</div>
 
-						<div class="btn-wrap payment-btn-wrap">
-							<button type="submit" class="btn payment-submit-btn submit-btn">
+						<div class="btn-wrap" id="book-now-wrap">
+							<button type="submit" class="btn book-submit-btn">
 								Book now
 							</button>
 						</div>
@@ -215,6 +218,17 @@ const bookNow = () => {
 	document.addEventListener('click', (e) => {
 		const bookNowBtn = e.target.closest('.book-now-btn');
 
+		const loaderTemplate = () => {
+			return `
+				<div class="container"> 
+					<div class="bar"></div> 
+					<div class="bar"></div> 
+					<div class="bar"></div> 
+					<div class="bar"></div> 
+				</div> 
+			`;
+		};
+
 		if (bookNowBtn) {
 			bookNowModal.classList.add('show-booknow-form');
 
@@ -222,19 +236,25 @@ const bookNow = () => {
 				bookNowModal.innerHTML = bookNowFormTemplate();
 
 				const bookNowForm = document.querySelector('.book-now-form');
+				const innerContainer = document.getElementById('inner-container');
+				innerContainer.classList.add('display-container');
 
-				if (!bookNowForm) return;
+				const bookNowBtnWrap = document.getElementById('book-now-wrap');
+
+				if (!bookNowForm) return; // checking if the button exists
 
 				bookNowForm.addEventListener('submit', async (e) => {
 					e.preventDefault();
+					bookNowBtnWrap.innerHTML = loaderTemplate();
+					bookNowBtnWrap.style.padding = '1em 1em';
 
 					const formData = new FormData(e.target);
-
 					const jsonData = {};
 
 					for (const [key, value] of formData.entries()) {
 						jsonData[key] = value;
 					}
+					console.log(jsonData);
 
 					const endPoint = '/.netlify/functions/send-appointment-data';
 
@@ -246,18 +266,21 @@ const bookNow = () => {
 							},
 							body: JSON.stringify(jsonData),
 						});
+						if (!res.ok) {
+							alert(
+								'⚠️ Your booking not successful at this time. Please click the OK button to try again!'
+							);
 
-						if (!res.ok) return;
+							location.reload();
+						} else {
+							const fetchedData = await res.json();
+							console.log(fetchedData);
 
-						const fetchedData = await res.json();
-
-						console.log(fetchedData);
-
-						alert(
-							'Thank you for reaching out! Your form has been submitted successfully!'
-						);
-
-						location.reload();
+							alert(
+								'Thank you for reaching out! Your form has been submitted successfully!'
+							);
+							location.reload();
+						}
 					} catch (error) {
 						console.error('Error:', error);
 					}
@@ -269,12 +292,12 @@ const bookNow = () => {
 					if (closeButton) {
 						bookNowModal.innerHTML = '';
 
-						setTimeout(() => {
-							bookNowModal.classList.remove('show-booknow-form');
-						}, 1000);
+						// setTimeout(() => {
+						bookNowModal.classList.remove('show-booknow-form');
+						// }, 400);
 					}
 				});
-			}, 500);
+			}, 400);
 		}
 	});
 };

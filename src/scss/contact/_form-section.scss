@@ -4,7 +4,7 @@
 	margin-top: -3em;
 	margin-bottom: 9em;
 
-	.container {
+	.form-wrapper {
 		width: 90%;
 		margin: 0 auto;
 		display: grid;
@@ -34,11 +34,71 @@
 				}
 
 				.btn-wrap {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background: resets.$dark-green;
+					border-radius: 8px;
+
 					.btn {
 						@include resets.primary-btn();
 						width: 100%;
 						background: resets.$dark-green;
 						color: resets.$accent-color;
+					}
+
+					.container {
+						--uib-size: 20px;
+						--uib-color: #bbf816 !important;
+						--uib-speed: 1s;
+						--uib-stroke: 3.5px;
+						background: orange;
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						width: var(--uib-size);
+						height: calc(var(--uib-size) * 0.9);
+						background: transparent;
+						position: relative;
+						z-index: 3;
+					}
+
+					.bar {
+						// width: var(--uib-stroke);
+						width: 4px;
+						height: 100%;
+						background-color: var(--uib-color);
+						transition: background-color 0.3s ease;
+					}
+
+					.bar:nth-child(1) {
+						animation: grow var(--uib-speed) ease-in-out
+							calc(var(--uib-speed) * -0.45) infinite;
+					}
+
+					.bar:nth-child(2) {
+						animation: grow var(--uib-speed) ease-in-out
+							calc(var(--uib-speed) * -0.3) infinite;
+					}
+
+					.bar:nth-child(3) {
+						animation: grow var(--uib-speed) ease-in-out
+							calc(var(--uib-speed) * -0.15) infinite;
+					}
+
+					.bar:nth-child(4) {
+						animation: grow var(--uib-speed) ease-in-out infinite;
+					}
+
+					@keyframes grow {
+						0%,
+						100% {
+							transform: scaleY(0.3);
+						}
+
+						50% {
+							transform: scaleY(1);
+						}
 					}
 				}
 			}
@@ -109,7 +169,7 @@
 		margin-top: 4em;
 		padding-left: 7em;
 
-		.container {
+		.form-wrapper {
 			width: 70%;
 			grid-template-columns: repeat(2, 1fr);
 

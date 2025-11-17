@@ -3,12 +3,14 @@ import 'ldrs/ring';
 import { waveform } from 'ldrs';
 waveform.register();
 
+// markDown configuration for contentful formatting
 import { marked } from 'marked';
 
 marked.setOptions = {
 	breaks: true,
 	gfm: true,
 };
+// end of markdown configuration for contentful formatting
 
 const programBtns = document.querySelectorAll('.programs-btn'); // all "see programs" button elements
 const learnMoreModal = document.querySelector('.learn-more-modal');
@@ -187,6 +189,8 @@ const triggerProducts = () => {
 					const productPrice = parseInt(buyButton.dataset.productPrice);
 					const productId = buyButton.dataset.productId;
 
+					console.log(productName);
+
 					// form logic goes here, which would appear first to collect the necessary data like email address to send to admin email after payment has been successful
 
 					const paymentFormModal = document.querySelector(
@@ -206,7 +210,6 @@ const triggerProducts = () => {
 						event.preventDefault();
 
 						const formData = new FormData(event.target);
-
 						const jsonData = {};
 
 						for (const [key, value] of formData.entries()) {
@@ -261,7 +264,7 @@ const triggerProducts = () => {
 
 								if (fetchedData) {
 									const handler = PaystackPop.setup({
-										key: fetchedData?.publicKey, // Your Paystack PUBLIC key
+										key: fetchedData?.publicKey, // Paystack PUBLIC key
 										email: email,
 										amount: amount * 100,
 										ref: fetchedData.data.reference, // Use reference from backend
@@ -274,11 +277,27 @@ const triggerProducts = () => {
 											// 	'Payment successful! Reference: ' + response.reference
 											// );
 
-											const sendFormData = async (e) => {
-												console.log(
-													'Json data from the payment notification logic:',
-													jsonData
-												);
+											// appending product name to the already existing formData
+											formData.append('productName', productName);
+											formData.append(
+												'transactionRef',
+												fetchedData.data.reference
+											);
+											formData.append('amountPaid', amount);
+											// formData.append("QuantityPurchased", quantity)
+
+											const updatedJson = Object.fromEntries(
+												formData.entries()
+											);
+
+											console.log(
+												'Json data from the payment notification logic:',
+												jsonData
+											);
+
+											console.log('Updated JsonData:', updatedJson);
+
+											const sendFormData = async (data) => {
 												try {
 													const response = await fetch(endpoint, {
 														method: 'POST',
@@ -286,7 +305,7 @@ const triggerProducts = () => {
 															'Content-Type': 'application/json',
 														},
 
-														body: JSON.stringify(jsonData),
+														body: JSON.stringify(data),
 													});
 
 													if (!response.ok) {
@@ -303,7 +322,7 @@ const triggerProducts = () => {
 												}
 											};
 
-											sendFormData();
+											sendFormData(updatedJson);
 										},
 
 										onClose: function () {

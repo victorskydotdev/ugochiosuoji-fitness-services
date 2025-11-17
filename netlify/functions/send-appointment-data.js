@@ -4,7 +4,7 @@ exports.handler = async (event, context) => {
 	console.log(JSON.parse(event.body));
 
 	try {
-		const { name, email, ReasonForAppointment, additionMessage } = JSON.parse(
+		const { name, email, ReasonForAppointment, additionalMessage } = JSON.parse(
 			event.body
 		);
 
@@ -17,41 +17,53 @@ exports.handler = async (event, context) => {
 			domain: DOMAIN,
 		});
 
+		const availBookings = {
+			In_person_coaching_experience: 'In-Person Coaching',
+			Speaking_engagement_Workout_breakout_sessions:
+				'Speaking Engaging/Workout Breakout Sessions',
+			Speaking_engagement_Workout_breakout_sessions:
+				'Corporate & Community Wellness Program',
+		};
+
+		const formattedReason = availBookings[ReasonForAppointment];
+
 		const response = await mg.messages().send({
 			from: `Booking Form Notification <admin@${DOMAIN}>`,
 			to: adminEmail,
 			subject: 'Contact Form Submission',
 
 			html: `
-	      <h1>Customer Info:</h1> <br />
-	      <strong>Name of customer:</strong> ${name}<br />
-	      <strong>Customer Email:</strong> ${email}<br />
-        <strong>Reason for booking: ${ReasonForAppointment}</strong> <br />
-	      <strong>Additional Booking Message:</strong> ${additionMessage},
-	    `,
-		});
+					Hello Admin, a new client has booked an appointment with you.
 
-		console.log(response);
+					Find client details and info below
+
+					<h4>Customer Info:</h4>
+					<strong>Name of customer:</strong> ${name}<br />
+					<strong style="margin-bottom: .7em;">Customer Email:</strong> ${email}<br />
+					<strong style="display: inline-block; padding: 1.1em; background: #3a8449; color: #fff; margin-bottom: .5em;">Reason for booking: ${formattedReason}</strong> <br />
+					<strong>Additional Booking Message:</strong> ${additionalMessage},
+		  `,
+		});
 
 		if (response) {
 			console.log('admin email submitted successfully');
 
 			// auto-responder to client
 			const autoRes = await mg.messages().send({
-				from: `Appointment <info@${DOMAIN}>`,
+				from: `Appointment <admin@${DOMAIN}>`,
 				to: email,
-				subject: 'Thank you from Ugochi Fitness Services',
+				subject: 'Ugochi Fitness Services',
 
 				html: `
-          <h4>Hello ${name}, thank you for reaching out to us.</h4>
-          <br />
+		      <h4>Hello ${name},</h4>
 
-          <p>Our team will respond or reach back to you as soon as possible. </p>
+					<p>You have successfully booked for:</p>
+					<strong style="display: inline-block; padding: 1.1em; background: #3a8449; color: #fff; margin-bottom: .8em;">Reason for booking: ${formattedReason}</strong> <br />
 
-          <br />
+		      <p>You'll be contacted as soon as possible to discuss further the details and see how we proceed</p>
 
-          <p>...from Ugochi Fitness Services Team.</p>
-        `,
+					<strong>Team, Ugochi Osuoji</strong>
+		    `,
 			});
 
 			return {

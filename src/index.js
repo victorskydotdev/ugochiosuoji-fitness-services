@@ -6,7 +6,7 @@ import { renderFooter } from './app/footer';
 import { accordionFunc } from './app/accordion';
 import { pageTransition } from './app/page-transition';
 import { triggerSwiper } from './app/swiper';
-import { redirectToServicesPage } from './app/app';
+import { redirectToServicesPage } from './app/products/app';
 import { showAboutInfo } from './app/about-modal';
 import { renderBlogArticles } from './app/blog';
 import { renderAndReadBlog } from './app/render-blog';
