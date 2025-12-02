@@ -1,7 +1,7 @@
 @use '../global/resets';
 
 .articles-section {
-	min-height: 400px;
+	min-height: 200px;
 	// background: teal;
 	width: 100%;
 	margin-bottom: 10em;
@@ -13,6 +13,21 @@
 		height: 100%;
 		display: grid;
 		gap: 3em;
+		justify-content: center;
+		position: relative;
+
+		.wrap {
+			display: grid;
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			gap: 1em;
+
+			.animation-container {
+				display: flex;
+				justify-content: center;
+			}
+		}
 
 		.blog-card {
 			background: #fff;
@@ -74,10 +89,6 @@
 			.blog-card {
 				// max-width: 320px;
 				box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.082);
-
-				.img-wrap {
-					// width: 300px;
-				}
 			}
 		}
 	}
